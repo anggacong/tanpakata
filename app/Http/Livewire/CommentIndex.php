@@ -10,15 +10,19 @@ class CommentIndex extends Component
     protected $listeners = [
         'commentStored' => '$refresh'
     ];
-    
+
+    public $undanganId;
+    public $color;
+
+
     public function render()
     {
-        $comment = comment::where('undangan_id', '3')->latest()->get();
-        return view('livewire.comment-index',[
-            'comment' => $comment
+
+
+        $comment = comment::where('undangan_id', $this->undanganId)->latest()->get();
+        return view('livewire.comment-index', [
+            'comment' => $comment,
+            'color' => $this->color,
         ]);
     }
-    
-
-    
 }

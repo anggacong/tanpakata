@@ -12,42 +12,45 @@ class CommentPost extends Component
     public $nama;
     public $asal;
     public $ucapan;
+    public $undanganId;
+    public $color;
 
-   
 
     public function render()
     {
-        return view('livewire.comment-post');
+        return view('livewire.comment-post', [
+            'color' => $this->color,
+        ]);
     }
 
     public function tambah()
     {
 
 
+
         $this->validate([
-            
+
             'nama' => 'required|min:3|max:15',
             'asal' => 'required',
             'ucapan' => 'required',
         ]);
 
-       $data = Comment::create([
-            'undangan_id' => '1',
+        $data = Comment::create([
+            'undangan_id' => $this->undanganId,
             'nama' => $this->nama,
             'asal' => $this->asal,
             'ucapan' => $this->ucapan
-       ]);
+        ]);
 
 
         $this->resetInput();
-        $this->emit('commentStored',$data);
+        $this->emit('commentStored', $data);
     }
 
-    private function resetInput(){
+    private function resetInput()
+    {
         $this->nama = null;
         $this->asal = null;
         $this->ucapan = null;
-        
     }
-
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UndanganController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,14 +31,16 @@ Route::get('/vintadanreza', function () {
 });
 
 Route::get('/herlambang', function () {
-    return view('pages.herlambang.index');
+    return view('pages.herlambang.index')->with(['undanganId' => 2, 'color' => 'bg-[#2c434b]']);
 });
 
-Route::get('/zakariadanjemari', function () {
-    return view('pages.zakariadanjemari.index');
+// Route::get('/zakariadanjemari', function () {
+//     $template = 'pages.zakariadanjemari.index';
+//     return view($template)->with(['undanganId' => 3, 'color' => 'bg-primarymini1-0']);
+// });
+
+Route::get('/s', function () {
+    return view('admin.dashboard.index');
 });
 
-Route::get('/tes', function () {
-    return view('pages.tes');
-});
-
+Route::get('{pengantin}', [UndanganController::class, 'index']);
